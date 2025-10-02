@@ -13,6 +13,28 @@ template <typename T>
 T findMaxRecTail(const T[], const int, int = 0);
 
 /*******************************************************************************
+ * Time Complexity Analysis:
+ * Each recursive call reduces the array size by 1 (moving the "head" forward).
+ * Hence, the total number of calls is O(SIZE).
+ * Each call does O(1) work (comparison + recursion).
+ * Therefore, total complexity = O(SIZE).
+*******************************************************************************/
+
+template <typename T>
+T findMaxRecTail(const T arr[], const int SIZE, int i) {
+    // Base case: only one element left
+    if (i == SIZE - 1) {
+        return arr[i];
+    }
+
+    // Recursive step: find max in the rest of the array
+    T maxRest = findMaxRecTail(arr, SIZE, i + 1);
+
+    // Tail comparison
+    return (arr[i] > maxRest) ? arr[i] : maxRest;
+}
+
+/*******************************************************************************
  * Description:
  * Starting point of the program. Creates two arrays, one fixed and the other
  * random. Determines the maximum value by calling the local function and the
